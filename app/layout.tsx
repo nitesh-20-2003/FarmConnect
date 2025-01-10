@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import Navbar from "@/components/navbar/Navbar";
+import Container from "@/components/global/Container";
+import Providers from "./providers";
+const inter = Inter({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "FarmConnect",
@@ -22,13 +19,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+ return (
+   <html lang="en" suppressHydrationWarning>
+     <body className={inter.className}>
+       <Providers>
+         <Navbar />
+         <Container className="py-20">{children}</Container>
+       </Providers>
+     </body>
+   </html>
+ );
 }
