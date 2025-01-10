@@ -3,7 +3,6 @@ import { MdQueryStats } from "react-icons/md";
 import Link from "next/link";
 async function stats() {
   // temp
-  const numItemsInCart = 9;
   return (
     <Button
       asChild
