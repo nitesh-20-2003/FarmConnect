@@ -1,12 +1,15 @@
-import { Button } from "@/components/ui/button";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import Hero from "@/components/home/Hero";
-function HomePage() {
+import LoadingContainer from "@/components/global/LoadingContainer";
+import { Suspense } from "react";
+function HomPage() {
   return (
-    <div>
+    <>
       <Hero />
-      <FeaturedProducts />
-    </div>
+      <Suspense fallback={<LoadingContainer />}>
+        <FeaturedProducts />
+      </Suspense>
+    </>
   );
 }
-export default HomePage;
+export default HomPage;
