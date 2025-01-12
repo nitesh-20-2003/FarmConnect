@@ -1,9 +1,8 @@
-import React from 'react'
+"use client";
 
-const loading = () => {
-  return (
-    <div>loading</div>
-  )
+import LoadingContainer from "@/components/global/LoadingContainer";
+
+function loading() {
+  return <LoadingContainer />;
 }
-
-export default loading
+export default loading;

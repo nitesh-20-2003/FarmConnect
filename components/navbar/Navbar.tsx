@@ -1,18 +1,26 @@
+import { Suspense } from "react";
 import Logo from "./Logo";
 import LinksDropdown from "./LinksDropdown";
 import DarkMode from "./DarkMode";
 import NavSearch from "./NavSearch";
 import Container from "../global/Container";
 import Stats from "./stats";
+import Crops from "./crops";
+
 function Navbar() {
+
+
   return (
-    <nav className="border-b ">
-      <Container className="flex flex-col sm:flex-row  sm:justify-between sm:items-center flex-wrap gap-4 py-8">
+    <nav className={`bg-white dark:bg-[#121212] border-b sticky top-0 z-50`}>
+      <Container className="flex flex-col sm:flex-row sm:justify-between sm:items-center flex-wrap gap-4 py-8">
         <Logo />
-        <NavSearch />
-        <div className="flex gap-4 items-center ">
+        <Suspense>
+          <NavSearch />
+        </Suspense>
+        <div className="flex gap-4 items-center">
           {/* <CartButton /> */}
-          <Stats/>
+          <Crops />
+          <Stats />
           <DarkMode />
           <LinksDropdown />
         </div>
@@ -20,4 +28,5 @@ function Navbar() {
     </nav>
   );
 }
+
 export default Navbar;
