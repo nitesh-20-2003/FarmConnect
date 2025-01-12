@@ -6,8 +6,8 @@ async function UserIcon() {
   const profileImage = user?.imageUrl;
   if (profileImage)
     return (
-      <Image src={profileImage} alt="user profile image" className="w- h-7 rounded-full object-cover" />
+      <Image src={profileImage} alt="user profile image"  width={25} height={25}className=" rounded-full object-cover" />
     );
-  return <FaCircleUser className="w-10 h- bg-black rounded-full text-white" />;
+  return <FaCircleUser className="w-10 h-10 bg-black rounded-full text-white" />;
 }
 export default UserIcon;
