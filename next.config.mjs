@@ -7,11 +7,19 @@ const nextConfig = {
         hostname: "images.pexels.com",
       },
       {
+        protocol:"https",
+        hostname:"zshltlhkhqapqjmibacn.supabase.co",
+      },
+      {
         protocol: "https",
-        hostname: "img.clerk.com", 
+        hostname: "img.clerk.com",
       },
     ],
   },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "20mb",
+    },
+  },
 };
-
 export default nextConfig;

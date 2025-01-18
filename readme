@@ -2298,7 +2298,6 @@ import CheckboxInput from '@/components/form/CheckboxInput';
 function CreateProduct() {
   const name = faker.commerce.productName();
   const company = faker.company.name();
-  // const description = faker.commerce.productDescription();
   const description = faker.lorem.paragraph({ min: 10, max: 12 });
 
   return (

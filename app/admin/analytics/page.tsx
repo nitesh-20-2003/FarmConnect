@@ -1,9 +1,9 @@
 import React from 'react'
 
-const page = () => {
+const Analytics_page = () => {
   return (
-    <div>page</div>
+    <div>Analytics_page</div>
   )
 }
 
-export default page
+export default Analytics_page
