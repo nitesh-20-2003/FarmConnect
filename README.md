@@ -45,5 +45,25 @@ To get started with FarmConnect, follow these steps:
 - **Tailwind CSS**: Tailwind CSS allows us to rapidly build custom user interfaces with its utility-first approach, making the styling process more efficient and maintainable.
 - **Zod**: Zod is used for schema declaration and validation, ensuring that our data is correctly structured and validated throughout the application.
 
+## Workflow
+### User Authentication and Authorization
+- Users must sign up or log in using Clerk to access the application.
+Clerk ensures secure user management with features like passwordless authentication and multi-factor authentication (MFA).
+Only authenticated users can access restricted pages, providing a secure and personalized experience.
+### Admin Access
+The admin user has exclusive access to the dashboard.
+Admins can create and manage various entities, such as farms, crops, or other relevant data.
+Admins can add, update, and delete data in the system.
+### Data Presentation
+All data is dynamically fetched from Supabase (powered by PostgreSQL) and displayed across various pages of the application.
+Pages are designed to present data in an organized way, including detailed statistics, charts, and metrics for actionable insights.
+### Real-Time Updates
+Supabase's real-time capabilities ensure that changes to the data are instantly reflected across the application.
+Users always see the most up-to-date information without needing to refresh the page manually.
+### UI/UX Design
+The application interface is built using shadcn/ui and Tailwind CSS, providing a consistent and visually appealing user experience.
+The design is fully responsive, ensuring seamless functionality across all devices.
+### Form Validation and Type Safety
+Forms and inputs are validated using Zod to ensure data correctness and prevent invalid submissions.
+TypeScript is used throughout the project, providing type safety, reducing runtime errors, and making the application scalable for future development.
 
-## Major Workflow
