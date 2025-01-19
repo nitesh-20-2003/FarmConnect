@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import db from "@/utils/db";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { productSchema ,validateWithZodSchema,imageSchema} from "./schemas";
+import { productSchema, validateWithZodSchema, imageSchema } from "./schemas";
 import { uploadImage } from "./supabase";
 const getAdminUser = async () => {
   const user = await getAuthUser();
@@ -59,7 +59,20 @@ export const fetchAllProducts = ({ search = "" }: { search: string }) => {
     },
   });
 };
-
+export const fetchAllCrops=()=>{
+  return db.crops.findMany();
+}
+export const fetchsingleCrop=async(cropId:string)=>{
+  const crop = await db.crops.findUnique({
+    where: {
+      id: cropId,
+    },
+  });
+  if (!crop) {
+    redirect("/crops");
+  }
+  return crop;
+}
 export const fetchSingleProduct = async (productId: string) => {
   const product = await db.product.findUnique({
     where: {
@@ -83,7 +96,6 @@ const getAuthUser = async () => {
   const user = await currentUser();
   if (!user) {
     throw new Error("You must be logged in to access this route");
-    
   }
   return user;
 };
@@ -91,7 +103,7 @@ export const createProductAction = async (
   prevState: any,
   formData: FormData
 ): Promise<{ message: string }> => {
-  "use server"
+  "use server";
   const user = await getAuthUser();
   try {
     const rawData = Object.fromEntries(formData);
@@ -127,7 +139,7 @@ export const updateProductAction = async (
   prevState: any,
   formData: FormData
 ) => {
-  "use server"
+  "use server";
   await getAdminUser();
   try {
     const productId = formData.get("id") as string;
