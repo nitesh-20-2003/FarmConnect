@@ -1,9 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+//! id ,clerkId always->connected to the user:)
+ 
 datasource db {
   provider          = "postgresql"
   url               = env("DATABASE_URL")
@@ -15,27 +11,19 @@ generator client {
 }
 
 model Product {
-  id           String     @id @default(uuid())
-  name        String
+  id          String     @id @default(uuid())
+  category    String
+  state       String
   company     String
   description String
-  featured   Boolean
   image       String
-  price       Int
+  price         Int
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   clerkId  String
-  favorites Favorite[]
   cartItems CartItem[]
 }
-model Favorite {
-  id        String   @id @default(uuid())
-  clerkId  String
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+
 model Cart {
   id        String   @id @default(uuid())
   clerkId  String
@@ -68,3 +56,16 @@ model CartItem {
     image       String
   MajorProducers String[]
  }
+ model Order {
+  id        String   @id @default(uuid())
+  clerkId  String
+  products Int  @default(0)
+  orderTotal Int @default(0)
+  tax Int @default(0)
+  shipping Int @default(0)
+  email String
+  isPaid Boolean @default(false)
+  // initially nothing is paid so isPaid is false
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

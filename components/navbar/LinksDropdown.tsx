@@ -17,7 +17,9 @@ import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
 async function LinksDropdown() {
   const authResult = await auth();
   const { userId } = authResult;
-   const isAdmin = userId === process.env.ADMIN_USER_ID;
+  // console.log(userId);
+   const isUser=userId;
+   //! if user not logged in isUser fn return null
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -42,7 +44,7 @@ async function LinksDropdown() {
         </SignedOut>
         <SignedIn>
           {links.map((link) => {
-             if (link.label === "dashboard" && !isAdmin) return null;
+             if (link.label === "dashboard" && !isUser) return null;
             return (
               <DropdownMenuItem key={link.href}>
                 <Link href={link.href} className="capitalize w-full">

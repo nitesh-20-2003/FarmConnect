@@ -7,6 +7,7 @@ type FormInputProps = {
   label?: string;
   defaultValue?: string;
   placeholder?: string;
+  size ?:string
 };
 
 function FormInput({
@@ -15,19 +16,24 @@ function FormInput({
   type,
   defaultValue,
   placeholder,
+  size
 }: FormInputProps) {
   return (
     <div className="mb-2">
-      <Label htmlFor={name} className="capitalize">
-        {label || name}
-      </Label>
+      <div className="ml-2">
+        <Label htmlFor={name} className="capitalize">
+          {label || name}
+        </Label>
+      </div>
+
       <Input
         id={name}
         name={name}
         type={type}
         defaultValue={defaultValue}
+        className={`select select-bordered ${size} mt-2 `}
         placeholder={placeholder}
-        required
+        // required
       />
     </div>
   );

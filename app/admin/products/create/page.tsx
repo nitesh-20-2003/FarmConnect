@@ -36,8 +36,14 @@ function CreateProduct() {
             <FormInput
               type="text"
               name="name"
-              label="product name"
+              label="category"
               defaultValue={name}
+            />
+            <FormInput
+              type="text"
+              name="name"
+              label="state"
+              defaultValue={"punjab"}
             />
             <FormInput
               type="text"
@@ -53,9 +59,9 @@ function CreateProduct() {
             labelText="product description"
             defaultValue={description}
           />
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <CheckboxInput name="featured" label="featured" />
-          </div>
+          </div> */}
 
           <SubmitButton text="Create Product" className="mt-8" />
         </FormContainer>

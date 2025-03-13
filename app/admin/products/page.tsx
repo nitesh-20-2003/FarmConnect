@@ -15,6 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 async function ItemsPage() {
+  //  await new Promise((resolve) => setTimeout(resolve, 1500));
     const items = await fetchAdminProducts();
   if (items.length === 0) return <EmptyList />;
   return (

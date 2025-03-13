@@ -2,11 +2,13 @@ import { Skeleton } from "../ui/skeleton";
 import { Card, CardContent } from "../ui/card";
 
 function LoadingContainer() {
+  const loadingItems = new Array(15).fill(null); // Create an array with 4 empty elements
+
   return (
     <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      <LoadingProduct />
-      <LoadingProduct />
-      <LoadingProduct />
+      {loadingItems.map((_, index) => (
+        <LoadingProduct key={index} />
+      ))}
     </div>
   );
 }
@@ -22,4 +24,5 @@ function LoadingProduct() {
     </Card>
   );
 }
+
 export default LoadingContainer;

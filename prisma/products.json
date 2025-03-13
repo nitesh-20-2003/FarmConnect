@@ -1,38 +1,111 @@
 [
   {
-    "name": "avant-garde lamp",
-    "company": "Modenza",
-    "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
-    "featured": true,
-    "image": "https://images.pexels.com/photos/943150/pexels-photo-943150.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    "price": 100,
-    "clerkId": "clerkId"
+    "category": "maize",
+    "state": "Punjab",
+    "company": "AgroHarvest",
+    "description": "Freshly harvested maize from the nutrient-rich fields of Punjab. Known for its golden kernels and superior taste, this maize is widely used for culinary dishes such as makki di roti and as a primary ingredient in livestock feed. The maize is carefully processed to retain its natural sweetness and packed with essential vitamins and minerals, ensuring high quality in every batch.",
+    "image": "/products/maize/maize1.jpg",
+    "price": 150,
+    "clerkId": "clerkId1"
   },
   {
-    "name": "chic chair",
-    "company": "Luxora",
-    "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
-    "featured": true,
-    "image": "https://images.pexels.com/photos/5705090/pexels-photo-5705090.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "category": "maize",
+    "state": "Maharashtra",
+    "company": "Golden Fields",
+    "description": "Premium quality maize cultivated in the fertile lands of Maharashtra. This maize is widely used in snacks like bhutta and corn-based cuisines. Sourced directly from trusted farmers, this maize is rich in antioxidants and dietary fiber. Its crunchy texture and natural sweetness make it a favorite choice for both household and industrial use.",
+    "image": "/products/maize/maize2.jpg",
+    "price": 120,
+    "clerkId": "clerkId2"
+  },
+  {
+    "category": "maize",
+    "state": "Karnataka",
+    "company": "GreenCrop Solutions",
+    "description": "Organic maize grown in the southern farmlands of Karnataka using sustainable practices. This maize is renowned for its large kernels, making it ideal for grilling, roasting, or as a base for traditional dishes. Rich in fiber, potassium, and vitamin B6, this maize is known for promoting digestive health and boosting immunity.",
+    "image": "/products/maize/maize3.jpg",
+    "price": 180,
+    "clerkId": "clerkId3"
+  },
+  {
+    "category": "maize",
+    "state": "Rajasthan",
+    "company": "Desert Harvest Co.",
+    "description": "Maize sourced from the dry yet fertile plains of Rajasthan. This variety thrives in arid climates, producing strong, flavorful kernels ideal for roasting or grinding into flour. Known for its robust taste and high protein content, this maize is a staple in many local delicacies.",
+    "image": "/products/maize/maize4.jpg",
+    "price": 140,
+    "clerkId": "clerkId4"
+  },
+  {
+    "category": "maize",
+    "state": "Uttar Pradesh",
+    "company": "FarmFresh Foods",
+    "description": "Sourced from Uttar Pradesh's fertile agricultural belt, this maize offers a balanced blend of taste and nutrition. Popular in dishes like corn curry and used extensively in food processing industries. The kernels are carefully selected for uniformity and freshness.",
+    "image": "/products/maize/maize5.jpg",
+    "price": 130,
+    "clerkId": "clerkId5"
+  },
+  {
+    "category": "maize",
+    "state": "Gujarat",
+    "company": "Sunshine Agro",
+    "description": "Maize cultivated in Gujarat’s warm climate is known for its sweet flavor and soft texture. Popular in savory snacks and traditional dishes, this maize undergoes a careful drying process to ensure long shelf life and enhanced taste.",
+    "image": "/products/maize/maize6.jpg",
+    "price": 160,
+    "clerkId": "clerkId6"
+  },
+  {
+    "category": "maize",
+    "state": "Madhya Pradesh",
+    "company": "Central Grain Co.",
+    "description": "Madhya Pradesh’s rich black soil produces high-quality maize that is ideal for grinding into flour or processing into oil. This maize is known for its bold flavor and high starch content, making it an excellent choice for food manufacturing industries.",
+    "image": "/products/maize/maize7.jpg",
+    "price": 170,
+    "clerkId": "clerkId7"
+  },
+  {
+    "category": "maize",
+    "state": "Bihar",
+    "company": "Eastern Harvests",
+    "description": "Maize sourced from Bihar’s nutrient-rich fields is recognized for its sweet and buttery taste. Widely consumed as grilled corn and used in traditional Bihar street foods, this maize offers an authentic taste experience.",
+    "image": "/products/maize/maize8.jpg",
+    "price": 110,
+    "clerkId": "clerkId8"
+  },
+  {
+    "category": "maize",
+    "state": "West Bengal",
+    "company": "Bengal Agri Corp",
+    "description": "This maize variety is grown in West Bengal’s fertile plains and is famous for its golden kernels. Often used in Bengali dishes and traditional recipes, this maize is ideal for boiling, roasting, or frying.",
+    "image": "/products/maize/maize9.jpg",
+    "price": 190,
+    "clerkId": "clerkId9"
+  },
+  {
+    "category": "maize",
+    "state": "Tamil Nadu",
+    "company": "Southern Harvest",
+    "description": "Maize cultivated in Tamil Nadu’s southern farmlands is characterized by its tender texture and natural sweetness. This maize is perfect for soups, salads, and curries, offering both nutrition and taste.",
+    "image": "/products/maize/maize10.jpg",
     "price": 200,
-    "clerkId": "clerkId"
+    "clerkId": "clerkId10"
   },
   {
-    "name": "comfy bed",
-    "company": "Homestead",
-    "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
-    "featured": true,
-    "image": "https://images.pexels.com/photos/1034584/pexels-photo-1034584.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    "price": 300,
-    "clerkId": "clerkId"
+    "category": "maize",
+    "state": "Tamil Nadu",
+    "company": "Southern Harvest",
+    "description": "Maize cultivated in Tamil Nadu’s southern farmlands is characterized by its tender texture and natural sweetness. This maize is perfect for soups, salads, and curries, offering both nutrition and taste.",
+    "image": "/products/maize/maize11.jpg",
+    "price": 200,
+    "clerkId": "clerkId10"
   },
   {
-    "name": "contemporary sofa",
-    "company": "Comfora",
-    "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
-    "featured": false,
-    "image": "https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    "price": 400,
-    "clerkId": "clerkId"
+    "category": "maize",
+    "state": "Tamil Nadu",
+    "company": "Southern Harvest",
+    "description": "Maize cultivated in Tamil Nadu’s southern farmlands is characterized by its tender texture and natural sweetness. This maize is perfect for soups, salads, and curries, offering both nutrition and taste.",
+    "image": "/products/maize/maize12.jpg",
+    "price": 200,
+    "clerkId": "clerkId10"
   }
+
 ]

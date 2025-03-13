@@ -8,7 +8,7 @@ function ProductsList({ products }: { products: Product[] }) {
   return (
     <div className="mt-12 grid gap-y-8">
       {products.map((product) => {
-        const { name, price, image, company } = product;
+        const { category, price, image, company } = product;
         const dollarsAmount = formatCurrency(price);
         const productId = product.id;
         return (
@@ -19,7 +19,7 @@ function ProductsList({ products }: { products: Product[] }) {
                   <div className="relative h-64  md:h-48 md:w-48">
                     <Image
                       src={image}
-                      alt={name}
+                      alt={company}
                       fill
                       sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw"
                       priority
@@ -28,7 +28,7 @@ function ProductsList({ products }: { products: Product[] }) {
                   </div>
 
                   <div>
-                    <h2 className="text-xl font-semibold capitalize">{name}</h2>
+                    <h2 className="text-xl font-semibold capitalize">{category}</h2>
                     <h4 className="text-muted-foreground">{company}</h4>
                   </div>
                   <p className="text-muted-foreground text-lg md:ml-auto">

@@ -1,12 +1,18 @@
 import ProductsContainer from "@/components/products/ProductsContainer";
-type tparams = Promise<{ layout?: string; search?: string }>;
-async function ProductsPage(props: { params: tparams }) {
-  const layout = (await props.params).layout || "grid";
-  const search = (await props.params).search || "";
-
+import {PaginationDemo} from "@/components/products/pagination";
+import Filters from "@/components/products/Filters";
+async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: { layout?: string; search?: string };
+}) {
+  const layout = (await searchParams).layout || "grid";
+  const search = (await searchParams).search || "";
   return (
     <>
+    <Filters meta={{}} />
       <ProductsContainer layout={layout} search={search} />
+      <PaginationDemo />
     </>
   );
 }

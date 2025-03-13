@@ -1,19 +1,17 @@
 const { PrismaClient } = require("@prisma/client");
-const crops = require("./crops.json");
+const products = require("./products.json");
 const prisma = new PrismaClient();
 
 async function main() {
-  for (const crop of crops) {
-    await prisma.crops.create({
-      data: crop,
+  for (const product of products) {
+    await prisma.product.create({
+      data: product,
     });
   }
 }
-
 main()
   .then(async () => {
     await prisma.$disconnect();
-    console.log("Seeding successful!");
   })
   .catch(async (e) => {
     console.error(e);
