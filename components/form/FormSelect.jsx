@@ -1,3 +1,4 @@
+// components/form/FormSelect.jsx
 "use client";
 
 import * as React from "react";
@@ -19,15 +20,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-// type FormSelectProps {
-//   type: string;
-//   label: string;
-//   name: string;
-//   list: string[]; // Dynamic list of strings
-//   size: string;
-//   defaultValue?: string;
-// }
-
 export function FormSelect({
   type,
   label,
@@ -36,35 +28,33 @@ export function FormSelect({
   size,
   defaultValue = "",
 }) {
+  console.log(list);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(defaultValue);
-  // console.log(list);
-
   return (
     <div className="mb-2">
-      <div className="ml-4">
+      <div className="ml-2">
         <Label htmlFor={name} className="capitalize">
           {label || name}
         </Label>
       </div>
-
       <div className="mt-2">
+        <input type="hidden" name={name} value={value} />
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className="w-[200px] justify-between"
+              className="w-[150px] justify-between"
             >
-              {value || (list?.length ? list[0] : "")}{" "}
-              {/* Display selected item */}
+              {value || (list?.length ? list[0] : "")}
               <ChevronsUpDown className="opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-[200px] p-0">
+          <PopoverContent className="w-[150px] p-0">
             <Command>
-              <CommandInput placeholder={` ${label}...`} />
+              <CommandInput placeholder={`${label}...`} />
               <CommandList>
                 <CommandEmpty>No {label} found.</CommandEmpty>
                 <CommandGroup>
@@ -73,12 +63,12 @@ export function FormSelect({
                       <CommandItem
                         key={item}
                         value={item}
-                        onSelect={(currentValue) => {
-                          setValue(currentValue === value ? "" : currentValue);
+                        onSelect={() => {
+                          setValue(item);
                           setOpen(false);
                         }}
                       >
-                        {item} {/* Display the string directly */}
+                        {item}
                         <Check
                           className={cn(
                             "ml-auto",
