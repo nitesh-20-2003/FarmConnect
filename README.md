@@ -1,32 +1,17 @@
 # FarmConnect
 
+## Description 
 FarmConnect is a platform designed to connect farmers with consumers, providing a marketplace for fresh, locally-sourced produce. Our mission is to support sustainable agriculture and promote healthy eating by making it easier for people to access farm-fresh products.
-
-    +-----------+               +---------+
-    |  Product  | <------------ | Rating  |
-    +-----------+   1 to many   +---------+
-         |
-         | many to many
-         v
-    +-----------+               +---------+
-    |   Order   | <------------ |  User   |
-    +-----------+   places      +---------+
-         ^
-         | contains
-         v
-    +-----------+
-    |  Producer |
-    +-----------+
 
 (User and Producer communication is enabled using WebRTC/WebSockets.)
 
 ---
 
 ## Table of Contents
-- **Features**
-- **Technologies Used**
-- **Installation**
-- **Future Work**
+## Features
+## Technologies Used
+## Installation
+## Future Work
 
 ---
 
@@ -55,12 +40,15 @@ FarmConnect is a platform designed to connect farmers with consumers, providing 
 
 ## Technologies Used
 
-- **React and Next.js**: Provides server-side rendering and dynamic routing for optimal performance.
+ **React and Next.js**: Provides server-side rendering and dynamic routing for optimal performance.
 - **Clerk**: For user authentication and management, ensuring secure login and profile features.
 - **Supabase**: Real-time database management using PostgreSQL, ensuring data scalability and integrity.
 - **PostgreSQL**: Robust database system for handling complex queries and transactions.
 - **Tailwind CSS**: Utility-first CSS framework for building custom, responsive interfaces efficiently.
 - **Zod**: Schema validation for ensuring data integrity across the application.
+-**Typescript**: Type checking and static analysis for improved code quality and security.
+-**Stripe**: Payment processing for secure transactions and subscriptions.
+
 
 ## Screenshots
 
