@@ -1,13 +1,13 @@
-import { fetchAllCrops } from "@/utils/action";
-import { Separator } from "@radix-ui/react-dropdown-menu";
+// import { fetchAllCrops } from "@/utils/action";
+// import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Button } from "../ui/button";
 import { PiPlantFill } from "react-icons/pi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import CropsContainer from "../crops/CropsContanier";
 import Link from "next/link";
-import { Suspense } from "react";
+// import { Suspense } from "react";
 async function MajorCrops() {
-  const crops=fetchAllCrops();
+  // const crops=fetchAllCrops();
   return (
     <section className="pt-24">
       <div className="mb-4">

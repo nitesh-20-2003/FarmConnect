@@ -6,8 +6,8 @@ import FormContainer from "../form/FormContainer";
 import { SubmitButton } from "../form/Buttons";
 import { removeCartItemAction, updateCartItemAction } from "@/utils/action";
 import { useToast } from "../ui/use-toast";
-import { IoReload } from "react-icons/io5";
-import { Button } from "../ui/button";
+// import { IoReload } from "react-icons/io5";
+// import { Button } from "../ui/button";
 
 function ThirdColumn({ quantity, id }: { quantity: number; id: string }) {
   const [amount, setAmount] = useState(quantity);

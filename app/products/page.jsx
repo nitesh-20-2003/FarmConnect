@@ -5,27 +5,13 @@ import { fetchAllProducts } from "@/utils/action";
 
 export default async function ProductsPage({
   searchParams,
-}: {
-  searchParams: {
-    layout?: string;
-    search?: string;
-    sortBy?: string;
-    state?: string;
-    freeShipping?: boolean;
-    category?: string;
-    rating?: number;
-    price?: number;
-    company?: string;
-    order?: string;
-    page?: number | string;
-  };
 }) {
   const layout = searchParams.layout || "grid";
   const search = searchParams.search || "";
   const sortBy = searchParams.order || "a-z";
   const state = searchParams.state || "";
   const freeShipping = searchParams.freeShipping || false;
-  const category = searchParams.category || "all";
+  // const category = searchParams.category || "all";
   const price = searchParams.price || 100;
   const company = searchParams.company || "all";
   const rating = searchParams.rating || 5;
@@ -38,7 +24,7 @@ export default async function ProductsPage({
     sortBy,
     state,
     freeShipping,
-    category,
+   
     rating,
     price,
     company,

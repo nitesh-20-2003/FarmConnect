@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { currentUser } from "@clerk/nextjs/server";
-import type { Metadata } from "next";
-type tParams = Promise<{ id: string }>;
-import {CalendarForm} from './calendar'
-async function SingleProductPage(props: { params: tParams }) {
- const data=await props.params;
+// import type { Metadata } from "next";
+// type tParams = Promise<{ id: string }>;
+import {MeetingSchedulerForm} from './calendar'
+import UserIcon from "/public/UserIcon.svg";
+async function SingleProductPage() {
+  
+//  const data=await props.params;
 //  console.log(data.farmerId);
 // const id=data.farmerId;
 //* clerk id is stored in  the farmId prop here
@@ -19,7 +21,7 @@ async function SingleProductPage(props: { params: tParams }) {
         <div className="w-full relative aspect-square max-w-[500px] mx-auto">
           {profileImage ? (
             <Image
-              src={profileImage}
+              src={UserIcon}
               alt="company"
               fill
               className="object-cover rounded-xl shadow-md"
@@ -36,7 +38,7 @@ async function SingleProductPage(props: { params: tParams }) {
         {/* Text Content Section */}
         <div>
           <div>
-            <h1 className="text-3xl font-bold mb-4">Farmer's Info</h1>
+            <h1 className="text-3xl font-bold mb-4">Farmers Info</h1>
             <p className="text-muted-foreground leading-7">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
               quia, quis a facilis consequatur excepturi at quaerat laborum aut
@@ -44,10 +46,13 @@ async function SingleProductPage(props: { params: tParams }) {
               eveniet doloremque!
             </p>
 
+            <p className="text-muted-foreground leading-7">
+              Additional information about the farmer can be added here.
+            </p>
           </div>
 
           <div className="mt-5">
-            <CalendarForm />
+            <MeetingSchedulerForm />
           </div>
         </div>
       </div>

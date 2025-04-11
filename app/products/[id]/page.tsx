@@ -5,7 +5,7 @@ import { formatCurrency } from "@/utils/format";
 import FavoriteToggleButton from "@/components/products/FavoriteToggleButton";
 import AddToCart from "@/components/single-product/AddtoCart";
 import ProductRating from "@/components/single-product/ProductRating";
-import { buttonVariants } from "@/components/ui/button";
+// import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 type tParams = Promise<{ id: string }>;

@@ -8,7 +8,7 @@ import SectionTitle from "@/components/global/SectionTitle"
 export function AccordionDemo() {
   return (
     <div className="mt-12">
-        <SectionTitle text={"frequently asked questions"} />
+      <SectionTitle text={"frequently asked questions"} />
       <Accordion type="single" collapsible className="w-full ">
         <AccordionItem value="item-1">
           <AccordionTrigger>Is it accessible?</AccordionTrigger>
@@ -26,7 +26,8 @@ export function AccordionDemo() {
         <AccordionItem value="item-3">
           <AccordionTrigger>Is it animated?</AccordionTrigger>
           <AccordionContent>
-            Yes. It's animated by default, but you can disable it if you prefer.
+            Yes. It&apos;s animated by default, but you can disable it if you
+            prefer.
           </AccordionContent>
         </AccordionItem>
       </Accordion>

@@ -1,6 +1,6 @@
 
 import { fetchAllCrops } from "@/utils/action";
-import { formatCurrency } from "@/utils/format";
+// import { formatCurrency } from "@/utils/format";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -12,10 +12,10 @@ async function CropsContainer() {
   return (
     <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {crops.map((crop) => {
-        const { name,MSP, image } = crop;
+        const { name, image } = crop;
 
         const productId = crop.id;
-        const INR = formatCurrency(MSP);
+        // const INR = formatCurrency(MSP);
         return (
           <article key={productId} className="group relative">
             <Link href={`/crops/${productId}`}>

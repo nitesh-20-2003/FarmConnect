@@ -4,23 +4,19 @@ import ProductsList from "./ProductsList";
 import { LuLayoutGrid, LuList } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { fetchAllProducts } from "@/utils/action";
-import Link from "next/link";
+// import { fetchAllProducts } from "@/utils/action";
+// import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 function ProductsContainer({
   layout,
   products,
   totalProducts,
-}: {
-  layout: string;
-  products: any[];
-  totalProducts: number;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const handleLayoutChange = (newLayout: string) => {
+  const handleLayoutChange = (newLayout) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("layout", newLayout);
     router.push(`/products?${params.toString()}`);

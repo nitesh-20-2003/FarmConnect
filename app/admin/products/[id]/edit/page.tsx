@@ -4,12 +4,12 @@ import FormInput from "@/components/form/FormInput";
 import PriceInput from "@/components/form/PriceInput";
 import TextAreaInput from "@/components/form/TextAreaInput";
 import { SubmitButton } from "@/components/form/Buttons";
-import CheckboxInput from "@/components/form/CheckBoxInput";
+// import CheckboxInput from "@/components/form/CheckBoxInput";
 type tParams = Promise<{ id: string }>;
 async function EditProductPage(props: { params: tParams }) {
   const { id } =  await props.params;
   const product = await fetchAdminProductDetails(id);
-  const {  company, description, price,state,category } = product;
+  const {  company, description, price,category } = product;
   return (
     <section>
       <h1 className="text-2xl font-semibold mb-8 capitalize">update product</h1>

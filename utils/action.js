@@ -5,7 +5,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { productSchema, validateWithZodSchema, imageSchema } from "./schemas";
 import { uploadImage } from "./supabase";
 import { Cart } from "@prisma/client";
-import { QueryMode } from "@prisma/client";
+// Removed QueryMode import as it is not exported from "@prisma/client"
 const getUser = async () => {
   const user = await getAuthUser(); // get the authenticated user
   if (!user || !user.id) redirect("/");
@@ -13,7 +13,7 @@ const getUser = async () => {
 };
 import { revalidatePath } from "next/cache";
 // !current user dashboard,
-export const deleteProductAction = async (prevState: { productId: string }) => {
+export const deleteProductAction = async (prevState) => {
   const { productId } = prevState;
   // await getAdminUser();
   // await getAdminUser();
@@ -42,20 +42,8 @@ export const fetchAllProducts = async ({
   rating,
   page,
   limit,
-}: {
-  layout?: string;
-  search?: string;
-  sortBy?: string;
-  state?: string;
-  freeShipping?: boolean;
-  category?: string;
-  rating?: number;
-  price?: number | string;
-  company?: string;
-  page?: number | string;
-  limit?: number | string;
 }) => {
-  let order: Record<string, "asc" | "desc"> = {};
+  let order= {};
 
   if (sortBy === "a-z") {
     order = { company: "asc" };
@@ -78,13 +66,13 @@ export const fetchAllProducts = async ({
   const whereFilter = {
     AND: [
       search
-        ? { category: { contains: search, mode: QueryMode.insensitive } }
+        ? { category: { contains: search, mode: "insensitive" } }
         : {},
       company && company !== "all"
-        ? { company: { contains: company, mode: QueryMode.insensitive } }
+        ? { company: { contains: company, mode: "insensitive" } }
         : {},
       state && state !== "all"
-        ? { state: { contains: state, mode: QueryMode.insensitive } }
+        ? { state: { contains: state, mode: "insensitive" } }
         : {},
       price ? { price: { gte: Number(price) } } : {},
     ],
@@ -105,7 +93,7 @@ export const fetchAllProducts = async ({
   return { products, totalProducts };
 };
 
-export const fetchSingleProduct = async (productId: string) => {
+export const fetchSingleProduct = async (productId) => {
   const product = await db.product.findUnique({
     where: {
       id: productId,
@@ -117,7 +105,7 @@ export const fetchSingleProduct = async (productId: string) => {
   return product;
 };
 
-const renderError = (error: unknown): { message: string } => {
+const renderError = (error) => {
   console.log(error);
   return {
     message: error instanceof Error ? error.message : "An error occurred",
@@ -132,15 +120,15 @@ const getAuthUser = async () => {
   return user;
 };
 export const createProductAction = async (
-  prevState: any,
-  formData: FormData
-): Promise<{ message: string }> => {
+  prevState,
+  formData
+) => {
   const user = await auth();
   const { userId } = user;
   // console.log(userId);
   try {
     const rawData = Object.fromEntries(formData);
-    const file = formData.get("image") as File;
+    const file = formData.get("image") 
     // console.log(rawData);
     // console.log(file);
     const validatedFields = validateWithZodSchema(productSchema, rawData);
@@ -182,7 +170,7 @@ export const fetchAdminProducts = async () => {
   });
   return products;
 };
-export const fetchAdminProductDetails = async (productId: string) => {
+export const fetchAdminProductDetails = async (productId) => {
   const user = await getUser();
   const product = await db.product.findUnique({
     where: {
@@ -195,12 +183,12 @@ export const fetchAdminProductDetails = async (productId: string) => {
 };
 
 export const updateProductAction = async (
-  prevState: any,
-  formData: FormData
+  prevState,
+  formData
 ) => {
   const user = await getUser();
   try {
-    const productId = formData.get("id") as string;
+    const productId = formData.get("id") 
     const rawData = Object.fromEntries(formData);
 
     const validatedFields = validateWithZodSchema(productSchema, rawData);
@@ -221,8 +209,8 @@ export const updateProductAction = async (
   }
 };
 export const updateProductImageAction = async (
-  prevState: any,
-  formData: FormData
+  prevState,
+  formData
 ) => {
   return { message: "Product Image updated successfully" };
 };
@@ -240,7 +228,7 @@ export const fetchCartItems = async () => {
   return cart?.numItemsInCart || 0;
 };
 
-const fetchProduct = async (productId: string) => {
+const fetchProduct = async (productId) => {
   const product = await db.product.findUnique({
     where: {
       id: productId,
@@ -263,9 +251,6 @@ const includeProductClause = {
 export const fetchOrCreateCart = async ({
   userId,
   errorOnFailure = false,
-}: {
-  userId: string;
-  errorOnFailure?: boolean;
 }) => {
   let cart = await db.cart.findFirst({
     where: {
@@ -294,10 +279,6 @@ const updateOrCreateCartItem = async ({
   productId,
   cartId,
   amount,
-}: {
-  productId: string;
-  cartId: string;
-  amount: number;
 }) => {
   let cartItem = await db.cartItem.findFirst({
     where: {
@@ -322,7 +303,7 @@ const updateOrCreateCartItem = async ({
   }
 };
 
-export const updateCart = async (cart: Cart) => {
+export const updateCart = async (cart) => {
   const cartItems = await db.cartItem.findMany({
     where: {
       cartId: cart.id,
@@ -362,10 +343,10 @@ export const updateCart = async (cart: Cart) => {
   return { currentCart, cartItems };
 };
 
-export const addToCartAction = async (prevState: any, formData: FormData) => {
+export const addToCartAction = async (prevState, formData) => {
   const user = await getAuthUser();
   try {
-    const productId = formData.get("productId") as string;
+    const productId = formData.get("productId");
     const amount = Number(formData.get("amount"));
     await fetchProduct(productId);
     const cart = await fetchOrCreateCart({ userId: user.id });
@@ -378,12 +359,12 @@ export const addToCartAction = async (prevState: any, formData: FormData) => {
 };
 
 export const removeCartItemAction = async (
-  prevState: any,
-  formData: FormData
+  prevState,
+  formData
 ) => {
   const user = await getAuthUser();
   try {
-    const cartItemId = formData.get("id") as string;
+    const cartItemId = formData.get("id") ;
     const cart = await fetchOrCreateCart({
       userId: user.id,
       errorOnFailure: true,
@@ -405,9 +386,6 @@ export const removeCartItemAction = async (
 export const updateCartItemAction = async ({
   amount,
   cartItemId,
-}: {
-  amount: number;
-  cartItemId: string;
 }) => {
   const user = await getAuthUser();
 
@@ -434,10 +412,10 @@ export const updateCartItemAction = async ({
 };
 
 //* Orders action
-export const createOrderAction = async (prevState: any, formData: FormData) => {
+export const createOrderAction = async (prevState, formData) => {
   const user = await getAuthUser();
-  let orderId: null | string = null;
-  let cartId: null | string = null;
+  let orderId= null;
+  let cartId = null;
   // their maybe issue in creating/obtaining the order and cartId so to be on safe side i use it null here initial value
   try {
     const cart = await fetchOrCreateCart({
@@ -508,7 +486,7 @@ export const fetchAdminOrders = async () => {
 export const fetchAllCrops = async () => {
   return db.crops.findMany();
 };
-export const fetchsingleCrop = async (cropId: string) => {
+export const fetchsingleCrop = async (cropId) => {
   const crop = await db.crops.findUnique({
     where: {
       id: cropId,
@@ -549,7 +527,7 @@ export const  fetchAllProducts = async({ search = "" }: { search: string }) => {
  */
 
 /** farmers company using its cleark id */
-export const fetchFarmersCompany = async (id: string) => {
+export const fetchFarmersCompany = async (id) => {
   const company = await db.product.findMany({
     where: {
       clerkId: id,

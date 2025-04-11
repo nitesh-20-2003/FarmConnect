@@ -9,10 +9,12 @@
 |        |  clientSecret response   |        |                  |         |
 +--------+                          +--------+                  +---------+
  */
+// app/checkout/page.tsx (or .jsx)
 "use client";
+
+import { Suspense, useCallback } from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import React, { useCallback } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   EmbeddedCheckoutProvider,
@@ -20,27 +22,24 @@ import {
 } from "@stripe/react-stripe-js";
 
 const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || (() => { 
+    throw new Error("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is not defined"); 
+  })()
 );
 
-export default function CheckoutPage() {
+function CheckoutPage() {
   const searchParams = useSearchParams();
 
   const orderId = searchParams.get("orderId");
   const cartId = searchParams.get("cartId");
-  // !located in search params of create order action
 
-  const fetchClientSecret = useCallback(
-    async () => {
-      // Create a Checkout Session
-      const response = await axios.post("/api/payment", {
-        orderId: orderId,
-        cartId: cartId,
-      });
-      return response.data.clientSecret;
-    },
-    []
-  );
+  const fetchClientSecret = useCallback(async () => {
+    const response = await axios.post("/api/payment", {
+      orderId,
+      cartId,
+    });
+    return response.data.clientSecret;
+  }, [orderId, cartId]);
 
   const options = { fetchClientSecret };
 
@@ -50,5 +49,13 @@ export default function CheckoutPage() {
         <EmbeddedCheckout />
       </EmbeddedCheckoutProvider>
     </div>
+  );
+}
+
+export default function CheckoutPageWithSuspense() {
+  return (
+    <Suspense fallback={<div>Loading checkout...</div>}>
+      <CheckoutPage />
+    </Suspense>
   );
 }

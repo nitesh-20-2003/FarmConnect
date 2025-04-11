@@ -9,7 +9,7 @@ type tParams = Promise<{ id: string }>;
 async function SingleProductPage(props: { params: tParams }) {
   const { id } = await props.params;
   const product = await fetchsingleCrop(id);
-  const { name, image, MSP, description, MajorProducers } = product;
+  const { name, image, MSP, description} = product;
   const dollarsAmount = formatCurrency(MSP);
 
   return (
