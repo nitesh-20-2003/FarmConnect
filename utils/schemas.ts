@@ -1,18 +1,18 @@
 import { z, ZodSchema } from "zod";
 
 export const productSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "name must be at least 2 characters.",
-    })
-    .max(100, {
-      message: "name must be less than 100 characters.",
-    }),
+  // name: z
+  //   .string()
+  //   .min(2, {
+  //     message: "name must be at least 2 characters.",
+  //   })
+  //   .max(100, {
+  //     message: "name must be less than 100 characters.",
+  //   }),
   company: z.string(),
   state: z.string(),
   category: z.string(),
-  featured: z.coerce.boolean(),
+  // featured: z.coerce.boolean(),
   price: z.coerce.number().int().min(0, {
     message: "price must be a positive number.",
   }),
@@ -31,6 +31,7 @@ export function validateWithZodSchema<T>(
   data: unknown
 ): T {
   const result = schema.safeParse(data);
+  console.log(result);
   if (!result.success) {
     const errors = result.error.errors.map((error) => error.message);
     throw new Error(errors.join(", "));

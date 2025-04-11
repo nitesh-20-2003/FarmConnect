@@ -34,7 +34,7 @@ async function ItemsPage() {
         </TableHeader>
         <TableBody>
           {items.map((item) => {
-            const { id: productId, name, company, price } = item;
+            const { id: productId, category,company, price } = item;
            return (
              <TableRow key={productId}>
                <TableCell>
@@ -42,7 +42,7 @@ async function ItemsPage() {
                    href={`/products/${productId}`}
                    className="underline text-muted-foreground tracking-wide capitalize"
                  >
-                   {name}
+                   {category}
                  </Link>
                </TableCell>
                <TableCell>{company}</TableCell>

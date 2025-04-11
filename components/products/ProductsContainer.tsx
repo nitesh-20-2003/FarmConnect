@@ -1,3 +1,4 @@
+"use client"
 import ProductsGrid from "./ProductsGrid";
 import ProductsList from "./ProductsList";
 import { LuLayoutGrid, LuList } from "react-icons/lu";
@@ -5,43 +6,48 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { fetchAllProducts } from "@/utils/action";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 
-async function ProductsContainer({
+function ProductsContainer({
   layout,
-  search,
+  products,
+  totalProducts,
 }: {
   layout: string;
-  search: string;
+  products: any[];
+  totalProducts: number;
 }) {
-  const products = await fetchAllProducts({search});
-  const totalProducts = products.length;
-  const searchTerm = search ? `&search=${search}` : "";
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleLayoutChange = (newLayout: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("layout", newLayout);
+    router.push(`/products?${params.toString()}`);
+  };
+
   return (
     <>
       {/* HEADER */}
       <section>
         <div className="flex justify-between items-center">
           <h4 className="font-medium text-lg">
-            {totalProducts} product{totalProducts > 1 && "s"}
+            {totalProducts} product{totalProducts !== 1 && "s"}
           </h4>
           <div className="flex gap-x-4">
             <Button
               variant={layout === "grid" ? "default" : "ghost"}
               size="icon"
-              asChild
+              onClick={() => handleLayoutChange("grid")}
             >
-              <Link href={`/products?layout=grid${searchTerm}`}>
-                <LuLayoutGrid />
-              </Link>
+              <LuLayoutGrid />
             </Button>
             <Button
               variant={layout === "list" ? "default" : "ghost"}
               size="icon"
-              asChild
+              onClick={() => handleLayoutChange("list")}
             >
-              <Link href={`/products?layout=list${searchTerm}`}>
-                <LuList />
-              </Link>
+              <LuList />
             </Button>
           </div>
         </div>
@@ -62,4 +68,5 @@ async function ProductsContainer({
     </>
   );
 }
+
 export default ProductsContainer;

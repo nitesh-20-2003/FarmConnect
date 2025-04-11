@@ -28,7 +28,7 @@ export function FormSelect({
   size,
   defaultValue = "",
 }) {
-  console.log(list);
+  // console.log(list);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(defaultValue);
   return (
@@ -46,7 +46,7 @@ export function FormSelect({
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className="w-[150px] justify-between"
+              className="w-auto justify-between"
             >
               {value || (list?.length ? list[0] : "")}
               <ChevronsUpDown className="opacity-50" />

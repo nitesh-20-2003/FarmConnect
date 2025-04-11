@@ -9,7 +9,7 @@ type tParams = Promise<{ id: string }>;
 async function EditProductPage(props: { params: tParams }) {
   const { id } =  await props.params;
   const product = await fetchAdminProductDetails(id);
-  const { name, company, description, featured, price } = product;
+  const {  company, description, price,state,category } = product;
   return (
     <section>
       <h1 className="text-2xl font-semibold mb-8 capitalize">update product</h1>
@@ -20,9 +20,9 @@ async function EditProductPage(props: { params: tParams }) {
             <input type="hidden" name="id" value={id} />
             <FormInput
               type="text"
-              name="name"
-              label="product name"
-              defaultValue={name}
+              name="category"
+              label="product category"
+              defaultValue={category}
             />
             <FormInput
               type="text"
@@ -38,13 +38,13 @@ async function EditProductPage(props: { params: tParams }) {
             labelText="product description"
             defaultValue={description}
           />
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <CheckboxInput
               name="featured"
               label="featured"
               defaultChecked={featured}
             />
-          </div>
+          </div> */}
           <SubmitButton text="update product" className="mt-8" />
         </FormContainer>
       </div>

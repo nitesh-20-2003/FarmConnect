@@ -35,13 +35,13 @@ function CreateProduct() {
           <div className="grid gap-4 md:grid-cols-2 my-4">
             <FormInput
               type="text"
-              name="name"
+              name="category"
               label="category"
               defaultValue={name}
             />
             <FormInput
               type="text"
-              name="name"
+              name="state"
               label="state"
               defaultValue={"punjab"}
             />

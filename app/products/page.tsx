@@ -1,8 +1,9 @@
 import ProductsContainer from "@/components/products/ProductsContainer";
-import { PaginationDemo } from "@/components/products/pagination";
+import {PaginationDemo} from "@/components/products/pagination";
 import Filters from "@/components/products/Filters";
 import { fetchAllProducts } from "@/utils/action";
-async function ProductsPage({
+
+export default async function ProductsPage({
   searchParams,
 }: {
   searchParams: {
@@ -10,39 +11,63 @@ async function ProductsPage({
     search?: string;
     sortBy?: string;
     state?: string;
-    freeShipping?: string;
+    freeShipping?: boolean;
+    category?: string;
+    rating?: number;
+    price?: number;
+    company?: string;
+    order?: string;
+    page?: number | string;
   };
 }) {
   const layout = searchParams.layout || "grid";
   const search = searchParams.search || "";
-  const sortBy = searchParams.sortBy || "";
+  const sortBy = searchParams.order || "a-z";
   const state = searchParams.state || "";
-  const freeShipping = searchParams.freeShipping || "";
-  const products=await fetchAllProducts({search});
-  const categories = Array.from(new Set(products.map((p: any) => p.category)));
-  const companies = Array.from(new Set(products.map((p: any) => p.company)));
-  const states = Array.from(new Set(products.map((p: any) => p.state)));
-  // console.log(categories);
-  // Create meta data object with required information
+  const freeShipping = searchParams.freeShipping || false;
+  const category = searchParams.category || "all";
+  const price = searchParams.price || 100;
+  const company = searchParams.company || "all";
+  const rating = searchParams.rating || 5;
+  const page = searchParams.page ? Number(searchParams.page) : 1;
+  const limit = 10; // Define how many items per page
+
+  // Fetch products and total count
+  const { products, totalProducts } = await fetchAllProducts({
+    search,
+    sortBy,
+    state,
+    freeShipping,
+    category,
+    rating,
+    price,
+    company,
+    page,
+    limit,
+  });
+
+  const categories = Array.from(new Set(products.map((p) => p.category)));
+  const companies = Array.from(new Set(products.map((p) => p.company)));
+  const states = Array.from(new Set(products.map((p) => p.state)));
+
   const meta = {
     categories,
     companies,
     states,
-    // You can add more meta data if needed
+    totalProducts,
+    page,
+    pageCount: Math.ceil(totalProducts / limit),
   };
+
   return (
     <>
-      <Filters meta={{meta}} />
+      <Filters meta={meta} />
       <ProductsContainer
         layout={layout}
-        search={search}
-        // sortBy={sortBy}
-        // state={state}
-        // freeShipping={freeShipping}
+        products={products}
+        totalProducts={totalProducts}
       />
-      <PaginationDemo />
+      <PaginationDemo meta={meta} />
     </>
   );
 }
-
-export default ProductsPage;

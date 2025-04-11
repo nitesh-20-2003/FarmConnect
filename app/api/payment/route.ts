@@ -52,7 +52,7 @@ export const POST = async (req: NextRequest) => {
       price_data: {
         currency: "inr", 
         product_data: {
-          name: cartItem.product.name,
+          name: cartItem.product.category,
           images: [cartItem.product.image],
         },
         unit_amount: cartItem.product.price * 100, 

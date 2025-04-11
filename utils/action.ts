@@ -1,13 +1,14 @@
-"use server"
+"use server";
 import { redirect } from "next/navigation";
 import db from "@/utils/db";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { productSchema, validateWithZodSchema, imageSchema } from "./schemas";
 import { uploadImage } from "./supabase";
 import { Cart } from "@prisma/client";
+import { QueryMode } from "@prisma/client";
 const getUser = async () => {
-  const user = await getAuthUser();// get the authenticated user
-  if (!user||!user.id) redirect("/");
+  const user = await getAuthUser(); // get the authenticated user
+  if (!user || !user.id) redirect("/");
   return user;
 };
 import { revalidatePath } from "next/cache";
@@ -15,12 +16,13 @@ import { revalidatePath } from "next/cache";
 export const deleteProductAction = async (prevState: { productId: string }) => {
   const { productId } = prevState;
   // await getAdminUser();
-const user = await getUser();
+  // await getAdminUser();
+  const user = await getUser();
   try {
     await db.product.delete({
       where: {
         id: productId,
-        clerkId:user.id,
+        clerkId: user.id,
       },
     });
 
@@ -30,39 +32,77 @@ const user = await getUser();
     return renderError(error);
   }
 };
-export const fetchAdminProducts = async () => {
-  // await getAdminUser();
-  const user = await getUser();
-  const products = await db.product.findMany({
-    where:{
-      clerkId:user.id,
-    },
-    orderBy: {
-      createdAt: "desc",
+export const fetchAllProducts = async ({
+  search,
+  sortBy,
+  state,
+  freeShipping,
+  price,
+  company,
+  rating,
+  page,
+  limit,
+}: {
+  layout?: string;
+  search?: string;
+  sortBy?: string;
+  state?: string;
+  freeShipping?: boolean;
+  category?: string;
+  rating?: number;
+  price?: number | string;
+  company?: string;
+  page?: number | string;
+  limit?: number | string;
+}) => {
+  let order: Record<string, "asc" | "desc"> = {};
 
-    },
-  });
-  return products;
-};
-export const fetchFeaturedProducts = async () => {
-  const products = await db.product.findMany({
-    
-  });
-  return products;
-};
+  if (sortBy === "a-z") {
+    order = { company: "asc" };
+  } else if (sortBy === "z-a") {
+    order = { company: "desc" };
+  } else if (sortBy === "high") {
+    order = { price: "asc" };
+  } else if (sortBy === "low") {
+    order = { price: "desc" };
+  } else {
+    order = { createdAt: "desc" };
+  }
 
-export const  fetchAllProducts = async({ search = "" }: { search: string }) => {
-  return db.product.findMany({
-    where: {
-      OR: [
-        { category: { contains: search, mode: "insensitive" } },
-        { company: { contains: search, mode: "insensitive" } },
-      ],
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
+  // Set default page and limit if not provided
+  const pageNum = page ? Number(page) : 1;
+  const limitNum = limit ? Number(limit) : 10;
+  const skip = (pageNum - 1) * limitNum;
+
+  // Build the common filter
+  const whereFilter = {
+    AND: [
+      search
+        ? { category: { contains: search, mode: QueryMode.insensitive } }
+        : {},
+      company && company !== "all"
+        ? { company: { contains: company, mode: QueryMode.insensitive } }
+        : {},
+      state && state !== "all"
+        ? { state: { contains: state, mode: QueryMode.insensitive } }
+        : {},
+      price ? { price: { gte: Number(price) } } : {},
+    ],
+  };
+  // Fetch paginated products
+  const products = await db.product.findMany({
+    where: whereFilter,
+    orderBy: order,
+    skip: skip,
+    take: limitNum,
   });
+
+  // Count total products matching the filter
+  const totalProducts = await db.product.count({
+    where: whereFilter,
+  });
+
+  return { products, totalProducts };
 };
 
 export const fetchSingleProduct = async (productId: string) => {
@@ -95,20 +135,29 @@ export const createProductAction = async (
   prevState: any,
   formData: FormData
 ): Promise<{ message: string }> => {
-
-  const user = await getAuthUser();
+  const user = await auth();
+  const { userId } = user;
+  // console.log(userId);
   try {
     const rawData = Object.fromEntries(formData);
     const file = formData.get("image") as File;
+    // console.log(rawData);
+    // console.log(file);
     const validatedFields = validateWithZodSchema(productSchema, rawData);
     const validatedFile = validateWithZodSchema(imageSchema, { image: file });
     const fullPath = await uploadImage(validatedFile.image);
-
+    // console.log(validatedFields);
+    // console.log(validatedFile);
+    // console.log(fullPath);
     await db.product.create({
       data: {
         ...validatedFields,
-        image: fullPath,
-        clerkId: user.id,
+        clerkId:
+          userId ??
+          (() => {
+            throw new Error("User ID is null");
+          })(),
+        image: fullPath, // Ensure the image path is included
       },
     });
   } catch (error) {
@@ -116,12 +165,29 @@ export const createProductAction = async (
   }
   redirect("/admin/products");
 };
+export const fetchAdminProducts = async () => {
+  const authResult = await auth();
+  const { userId } = authResult;
+  const products = await db.product.findMany({
+    where: {
+      clerkId:
+        userId ??
+        (() => {
+          throw new Error("User ID is null");
+        })(),
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return products;
+};
 export const fetchAdminProductDetails = async (productId: string) => {
- const user= await getUser();
+  const user = await getUser();
   const product = await db.product.findUnique({
     where: {
       id: productId,
-      clerkId:user.id,
+      clerkId: user.id,
     },
   });
   if (!product) redirect("/admin/products");
@@ -132,8 +198,7 @@ export const updateProductAction = async (
   prevState: any,
   formData: FormData
 ) => {
-
- const user= await getUser();
+  const user = await getUser();
   try {
     const productId = formData.get("id") as string;
     const rawData = Object.fromEntries(formData);
@@ -143,7 +208,7 @@ export const updateProductAction = async (
     await db.product.update({
       where: {
         id: productId,
-        clerkId:user.id,
+        clerkId: user.id,
       },
       data: {
         ...validatedFields,
@@ -368,7 +433,6 @@ export const updateCartItemAction = async ({
   }
 };
 
-
 //* Orders action
 export const createOrderAction = async (prevState: any, formData: FormData) => {
   const user = await getAuthUser();
@@ -388,7 +452,7 @@ export const createOrderAction = async (prevState: any, formData: FormData) => {
         isPaid: false,
       },
     });
-      // remove all existing instances where isPaid is false
+    // remove all existing instances where isPaid is false
     const order = await db.order.create({
       data: {
         clerkId: user.id,
@@ -421,12 +485,17 @@ export const fetchUserOrders = async () => {
 };
 
 export const fetchAdminOrders = async () => {
-  const user = await getUser();
+  const user = await auth();
+  const { userId } = user;
 
   const orders = await db.order.findMany({
     where: {
       isPaid: true,
-      clerkId:user.id,
+      clerkId:
+        userId ??
+        (() => {
+          throw new Error("User ID is null");
+        })(),
     },
     orderBy: {
       createdAt: "desc",
@@ -478,3 +547,14 @@ export const  fetchAllProducts = async({ search = "" }: { search: string }) => {
 };
 
  */
+
+/** farmers company using its cleark id */
+export const fetchFarmersCompany = async (id: string) => {
+  const company = await db.product.findMany({
+    where: {
+      clerkId: id,
+    },
+  });
+  if (!company) redirect("/");
+  return company;
+};
