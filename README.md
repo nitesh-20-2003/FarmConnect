@@ -8,10 +8,11 @@ FarmConnect is a platform designed to connect farmers with consumers, providing 
 ---
 
 ## Table of Contents
-## Features
-## Technologies Used
-## Installation
-## Future Work
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Future Work](#future-work)
+
 
 ---
 
