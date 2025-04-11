@@ -8,14 +8,24 @@ FarmConnect is a platform designed to connect farmers with consumers, providing 
 ---
 
 ## Table of Contents
-- [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Features](#features)
 - [Installation](#installation)
 - [Future Work](#future-work)
 
 
 ---
 
+## Technologies Used
+
+ **React and Next.js**: Provides server-side rendering and dynamic routing for optimal performance.
+- **Clerk**: For user authentication and management, ensuring secure login and profile features.
+- **Supabase**: Real-time database management using PostgreSQL, ensuring data scalability and integrity.
+- **PostgreSQL**: Robust database system for handling complex queries and transactions.
+- **Tailwind CSS**: Utility-first CSS framework for building custom, responsive interfaces efficiently.
+- **Zod**: Schema validation for ensuring data integrity across the application.
+-**Typescript**: Type checking and static analysis for improved code quality and security.
+-**Stripe**: Payment processing for secure transactions and subscriptions.
 ## Features
 
 ### 1. Improved UI with Suspense and Skeleton Components
@@ -37,21 +47,23 @@ FarmConnect is a platform designed to connect farmers with consumers, providing 
   - Delete existing products.
   - Manage product inventory and details.
 
+### 5. Payment Processing
+- **Description**: Enables secure payment processing using Stripe.
+- **Functionalities**:
+  - Accept payments for products.
+  - Handle subscriptions and billing.
+ ### 6. Advanced Filters and  Pagination
+- **Description**: Implements advanced filters and pagination for product exploration.
+- **Functionalities**:
+  - Filter products based on various criteria.
+  - Navigate through multiple pages of products. 
 ---
 
-## Technologies Used
-
- **React and Next.js**: Provides server-side rendering and dynamic routing for optimal performance.
-- **Clerk**: For user authentication and management, ensuring secure login and profile features.
-- **Supabase**: Real-time database management using PostgreSQL, ensuring data scalability and integrity.
-- **PostgreSQL**: Robust database system for handling complex queries and transactions.
-- **Tailwind CSS**: Utility-first CSS framework for building custom, responsive interfaces efficiently.
-- **Zod**: Schema validation for ensuring data integrity across the application.
--**Typescript**: Type checking and static analysis for improved code quality and security.
--**Stripe**: Payment processing for secure transactions and subscriptions.
 
 
 ## Screenshots
+### Schema Design
+![Schema](./Screenshots/FarmConnectSchema.png)
 
 ### Home Page
 ![Home Page](./Screenshots/homePage.png)
@@ -76,38 +88,51 @@ FarmConnect is a platform designed to connect farmers with consumers, providing 
 
 ![Supabase bucket storage ](./Screenshots/Screenshot%20from%202025-01-19%2019-36-29.png)
 ---
+###  Advanced Filters And Pagination
 
-## Installation
+![Advanced Filters And Pagination](./Screenshots/FiltersAndPagination1.png)
 
-To get started with the project, follow these steps:
+![Advanced Filters And Pagination](./Screenshots/StateFilters.png)
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/nitesh-20-2003/Ecommerce-Dashboard.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd Ecommerce-Dashboard
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the development server:
-    ```bash
-    npm start
-    ```
-## Technologies Used
-- **Next.js**: We chose Next.js for its powerful features like server-side rendering and static site generation, which improve performance and SEO for our web application.
--**Typescript**:To provide type security to the project instead of javascript to scale the project to higher level.
-- **Clerk**: Clerk is used for user authentication and management, providing a seamless and secure way for users to sign up, log in, and manage their profiles.
-- **shadcn/ui**: This library offers a collection of accessible and customizable UI components, helping us build a consistent and visually appealing user interface.
-- **Supabase**: Supabase is an open-source alternative to Firebase, offering real-time database capabilities and authentication using PostgreSQL, which ensures data integrity and scalability.
-- **PostgreSQL**: We use PostgreSQL as our database system due to its robustness, scalability, and support for complex queries and transactions.
-- **Tailwind CSS**: Tailwind CSS allows us to rapidly build custom user interfaces with its utility-first approach, making the styling process more efficient and maintainable.
-- **Zod**: Zod is used for schema declaration and validation, ensuring that our data is correctly structured and validated throughout the application.
+### Cart 
+
+![Cart](./Screenshots/Cart.png)
+
+### Stripe Payment
+
+ ### direct payment from front end to stripe is not so secure so i am going to use an routing intead
+ ### instead of direct sending request ill send it first to my route defined than it to the stripe API
+
+ ```plaintext
++--------+    Fetch clientSecret    +--------+   Request        +---------+
+| Client | -----------------------> | Server | ---------------> | Stripe  |
+|        |                          |        |                  |  API    |
+|        |                          |        | <--------------- |         |
+|        | <----------------------- |        |   clientSecret   |         |
+|        |  clientSecret response   |        |                  |         |
++--------+                          +--------+                  +---------+
+
+Checkout.tsx                        payment/route.ts
+
+```
 
 
+```plaintext
++--------+    Checkout Session ID   +--------+    redirect      +---------+
+| Server | -----------------------> | Server | ---------------> | Orders  |
+|        |                          |        |                  |         |
+|        |                          |        |                  |         |
+|        |                          |        |                  |         |
+|        |                          |        |                  |         |
++--------+                          +--------+                  +---------+
+
+payment/route.ts                    confirm/route.ts            orders page
+
+```
+
+![StripePaymentCheckout ](./Screenshots/StripeCheckout.png)
+
+![stripePaymentConfirmation](./Screenshots/PayMentConfirmation.png)
 ## Workflow
 ### User Authentication and Authorization
 - Users must sign up or log in using Clerk to access the application.
@@ -133,44 +158,41 @@ TypeScript is used throughout the project, providing type safety, reducing runti
 
 ## Future Work
 
-### 1. One-to-Many Relationship for Ratings
-- **Objective**: Enable each product to have multiple unique ratings.
-- **Benefits**:
-  - Allows users to rate products individually.
-  - Aggregates product ratings to provide a comprehensive overview.
+### 1. Real-Time Video Calling Functionality
+- **Description**: 
+  - Implementing real-time communication between users and farmers using WebRTC.
+  - This feature will allow users to interact directly with farmers through video calls, enabling better communication and trust.
+- **Purpose**:
+  - To provide a seamless and interactive experience for users to discuss products, farming practices, or any other queries directly with farmers.
+- **ER Diagram**:
+  Below is the Entity-Relationship (ER) diagram for the video calling functionality:
 
-### 2. Cart Orders for Each Product
-- **Objective**: Establish a feature where each product can be added to multiple orders.
-- **Benefits**:
-  - Facilitates seamless cart and checkout functionalities.
-  - Tracks order history for better user insights.
+  ```plaintext
+  +----------------+       +----------------+       +----------------+
+  |     Users      |       |   Call Logs    |       |    Farmers     |
+  +----------------+       +----------------+       +----------------+
+  | userId (PK)    |       | callId (PK)    |       | farmerId (PK)  |
+  | name           |       | userId (FK)    |       | name           |
+  | email          |       | farmerId (FK)  |       | email          |
+  | ...            |       | timestamp      |       | ...            |
+  +----------------+       +----------------+       +----------------+
+ -**just an example how meeting sceduling works**
 
-### 3. AI-based Chatbot Integration
-- **Objective**: Integrate an AI-powered chatbot using Dialogflow and Flask.
-- **Benefits**:
-  - Enhances user interaction with instant query resolution.
-  - Guides users in navigating the platform and understanding features.
+![stripePaymentConfirmation](./Screenshots/SceduleMeetingwithfarmer.png)
 
-### 4. Real-time Communication Between Users and Producers
-- **Objective**: Introduce a feature using WebRTC and WebSockets to enable direct communication between users and producers.
-- **Use Cases**:
-  - **Collaboration**: Facilitates partnerships and discussions for future deals.
-  - **Personalized Assistance**: Users can directly discuss product details, bulk orders, or customizations with producers.
+### 2. AI-Powered Chatbot Using NLP (Dialogflow)
 
----
+-**Description**:
+Developing an intelligent chatbot using Dialogflow to assist users with various tasks.
+The chatbot will be capable of:
+Answering user queries about products, orders, and platform features.
+Assisting users in placing orders.
+Providing recommendations based on user preferences.
+-**Purpose**:
+To enhance user experience by providing instant support and reducing the dependency on human customer service.
+-**Functionalities**:
+Order Placement: Users can interact with the chatbot to add items to their cart and place orders.
+Query Resolution: The chatbot will answer frequently asked questions and provide guidance on using the platform.
+Personalized Recommendations: Using NLP, the chatbot will analyze user preferences and suggest relevant products.
+These features aim to make FarmConnect more interactive, user-friendly, and efficient, ensuring a better experience for both users and farmers.
 
-## ER Diagram (Proposed Relationships)
-
-### Entities and Relationships
-1. **Product**:
-   - Has a one-to-many relationship with **Rating**.
-   - Can be associated with multiple **Orders**.
-
-2. **Rating**:
-   - Each product can have multiple unique ratings.
-
-3. **Order**:
-   - Contains multiple products, enabling users to create customized carts.
-
-4. **User and Producer Communication**:
-   - Enabled via WebRTC and WebSockets for real-time interaction.

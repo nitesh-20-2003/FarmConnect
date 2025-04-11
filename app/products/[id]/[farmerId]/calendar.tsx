@@ -13,7 +13,6 @@ import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,20 +24,21 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+// Define the schema for form validation
 const FormSchema = z.object({
-  dob: z.date({
-    required_error: "A date of birth is required.",
+  meetingDate: z.date().refine((date) => date > new Date(), {
+    message: "Please select a future date for the meeting.",
   }),
 });
 
-export function CalendarForm() {
+export function MeetingSchedulerForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
-      title: "You submitted the following values:",
+      title: "Meeting Scheduled",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
@@ -53,7 +53,7 @@ export function CalendarForm() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="dob"
+            name="meetingDate"
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>Schedule Meeting</FormLabel>
@@ -61,7 +61,7 @@ export function CalendarForm() {
                   <PopoverTrigger asChild>
                     <FormControl>
                       <Button
-                        variant={"outline"}
+                        variant="outline"
                         className={cn(
                           "w-[240px] pl-3 text-left font-normal",
                           !field.value && "text-muted-foreground"
@@ -81,16 +81,11 @@ export function CalendarForm() {
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
+                      disabled={(date) => date < new Date()}
                       initialFocus
                     />
                   </PopoverContent>
                 </Popover>
-                {/* <FormDescription>
-                Your date of birth is used to calculate your age.
-              </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
