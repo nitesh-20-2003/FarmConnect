@@ -12,10 +12,10 @@ function Hero() {
           We are Connecting Farmers to Retailers
         </h1>
         <p className="mt-8 max-w-xl text-lg leading-8 text-muted-foreground">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque et
-          voluptas saepe in quae voluptate, laborum maiores possimus illum
-          reprehenderit aut delectus veniam cum perferendis unde sint doloremque
-          non nam.
+          FarmConnect bridges the gap between farmers and retailers through a
+          secure and easy-to-use platform. We empower farmers to sell their
+          fresh produce directly to trusted buyers, ensuring fair prices, better
+          profits, and a stronger farming community.
         </p>
 
         {/* Button and Audio Player in one row */}

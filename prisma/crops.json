@@ -3,42 +3,42 @@
     "name": "Wheat",
     "MSP": 2275,
     "description": "Wheat is a staple food grain in India, extensively cultivated in the northern states. It is known for its high carbohydrate content and serves as the primary ingredient in numerous dishes like bread, chapati, and pasta. Wheat is also used in brewing, animal feed, and even biofuel production, making it a versatile crop.",
-    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect/wheat.jpg",
+    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect//1744379747944-wheat.jpg",
     "MajorProducers": ["Punjab", "Haryana", "Madhya Pradesh"]
   },
   {
     "name": "Rice",
     "MSP": 2183,
     "description": "Rice is a crucial crop in India, primarily grown in states with a rich supply of water. It is a staple food for more than half of the world's population and forms the basis of many traditional Indian dishes like biryani and idli. Additionally, rice husk and bran are used in the production of animal feed, oil, and various industrial applications.",
-    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect/rice.jpg",
+    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect//rice.jpg",
     "MajorProducers": ["West Bengal", "Uttar Pradesh", "Punjab"]
   },
   {
     "name": "Cotton",
     "MSP": 6620,
     "description": "Cotton is a key cash crop in India, known for its extensive use in the textile industry. It is a vital source of livelihood for farmers in several states, contributing significantly to the country's export earnings. Cotton by-products like cottonseed oil and cottonseed meal are also used in food and feed industries.",
-    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect/cotton.jpg",
+    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect//cotton.jpg",
     "MajorProducers": ["Gujarat", "Maharashtra", "Telangana"]
   },
   {
     "name": "Maize",
     "MSP": 2090,
     "description": "Maize, also known as corn, is a versatile crop used for food, fodder, and industrial purposes. It is rich in vitamins, minerals, and antioxidants, making it an essential part of many diets worldwide. Maize is also used in the production of biofuels, sweeteners, and as a raw material in various industrial processes.",
-    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect/maize.jpg",
+    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect//Maize.jpg",
     "MajorProducers": ["Karnataka", "Madhya Pradesh", "Andhra Pradesh"]
   },
   {
     "name": "Pulses",
     "MSP": 7000,
     "description": "Pulses are a significant source of protein in vegetarian diets in India. They include various legumes like lentils, chickpeas, and beans, which are rich in fiber, vitamins, and minerals. Pulses are also crucial for soil health as they fix nitrogen, reducing the need for chemical fertilizers.",
-    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect/pulses.jpg",
+    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect//Pulses.jpg",
     "MajorProducers": ["Madhya Pradesh", "Rajasthan", "Uttar Pradesh"]
   },
   {
     "name": "Sugarcane",
     "MSP": 3050,
     "description": "Sugarcane is a major commercial crop in India, primarily used for sugar production. It is also used in the production of ethanol and jaggery, playing a vital role in the rural economy. By-products like bagasse are used in the paper and bioenergy industries, making sugarcane an economically significant crop.",
-    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect/sugarcane.jpg",
+    "image": "https://zshltlhkhqapqjmibacn.supabase.co/storage/v1/object/public/FarmConnect//Sugarcane.jpg",
     "MajorProducers": ["Uttar Pradesh", "Maharashtra", "Karnataka"]
   }
 ]

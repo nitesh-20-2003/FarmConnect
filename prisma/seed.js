@@ -1,10 +1,10 @@
 const { PrismaClient } = require("@prisma/client");
-const products = require("./products.json");
+const products = require("./crops.json");
 const prisma = new PrismaClient();
 
 async function main() {
   for (const product of products) {
-    await prisma.product.create({
+    await prisma.crops.create({
       data: product,
     });
   }
