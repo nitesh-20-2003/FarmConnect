@@ -3,7 +3,7 @@ import { fetchsingleCrop } from "@/utils/action";
 import Image from "next/image";
 import { formatCurrency } from "@/utils/format";
 import { Component } from "./chart";
-import FavoriteToggleButton from "@/components/products/FavoriteToggleButton";
+// import FavoriteToggleButton from "@/components/products/FavoriteToggleButton";
 import ProductRating from "@/components/single-product/ProductRating";
 type tParams = Promise<{ id: string }>;
 async function SingleProductPage(props: { params: tParams }) {
@@ -31,7 +31,7 @@ async function SingleProductPage(props: { params: tParams }) {
         <div>
           <div className="flex gap-x-8 items-center">
             <h1 className="capitalize text-3xl font-bold">{name}</h1>
-            <FavoriteToggleButton />
+            {/* <FavoriteToggleButton /> */}
           </div>
           <ProductRating productId={id} />
           <h4 className="text-xl mt-2">Nitesh Sharma</h4>

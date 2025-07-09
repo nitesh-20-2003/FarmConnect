@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import {AccordionDemo} from '@/components/home/Accordation'
 import MajorCrops from '@/components/home/MajorCrops'
 import {ChartAreaInteractive} from "@/components/home/Chart";
+import {CarouselSize} from "@/components/home/Equipments";
 function HomPage() {
   return (
     <div>
@@ -13,6 +14,7 @@ function HomPage() {
         <MajorCrops />
       </Suspense>
       <AccordionDemo />
+      <CarouselSize />
     </div>
   );
 }
