@@ -9,12 +9,12 @@ function HomPage() {
   return (
     <div>
       <Hero />
-        <ChartAreaInteractive />
+      <ChartAreaInteractive />
+      <CarouselSize />
       <Suspense fallback={<LoadingContainer />}>
         <MajorCrops />
       </Suspense>
       <AccordionDemo />
-      <CarouselSize />
     </div>
   );
 }
