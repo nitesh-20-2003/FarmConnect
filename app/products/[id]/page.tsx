@@ -2,9 +2,10 @@ import BreadCrumbs from "@/components/single-product/BreadCrumbs";
 import { fetchSingleProduct } from "@/utils/action";
 import Image from "next/image";
 import { formatCurrency } from "@/utils/format";
+import ShareButton from "@/components/single-product/ShareButton";
 // import FavoriteToggleButton from "@/components/products/FavoriteToggleButton";
 import AddToCart from "@/components/single-product/AddtoCart";
-import ProductRating from "@/components/single-product/ProductRating";
+// import ProductRating from "@/components/single-product/ProductRating";
 // import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -35,8 +36,10 @@ async function SingleProductPage(props: { params: tParams }) {
           <div className="flex gap-x-8 items-center">
             <h1 className="capitalize text-3xl font-bold">{category}</h1>
             {/* <FavoriteToggleButton /> */}
+            <ShareButton name={product.category} productId={id} />
           </div>
-          <ProductRating productId={id} />
+
+          {/* <ProductRating productId={id} /> */}
           <h4 className="text-xl mt-2">{company}</h4>
           <p className="mt-3 text-md bg-muted inline-block p-2 rounded-md">
             {dollarsAmount}

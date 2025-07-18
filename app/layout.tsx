@@ -13,6 +13,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "FarmConnect",
   description: "An initiative to bridge gap between farmers and retailers",
+  icons: {
+    icon: "@/public/Farmconnect.png",
+  },
 };
 
 export default function RootLayout({

@@ -40,10 +40,12 @@ async function SingleProductPage() {
           <div>
             <h1 className="text-3xl font-bold mb-4">Farmers Info</h1>
             <p className="text-muted-foreground leading-7">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-              quia, quis a facilis consequatur excepturi at quaerat laborum aut
-              dolores. Cumque sint voluptatem soluta quisquam itaque ipsum nihil
-              eveniet doloremque!
+              Farmers are the backbone of our economy, ensuring food security
+              and sustainability. Despite facing unpredictable weather,
+              fluctuating market prices, and limited resources, they continue to
+              provide essential produce to millions. Supporting farmers means
+              strengthening rural communities and promoting healthier, local
+              food systems.
             </p>
 
             <p className="text-muted-foreground leading-7">

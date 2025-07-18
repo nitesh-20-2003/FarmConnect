@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { VscCode } from "react-icons/vsc";
+// import logo from "@/public/fclogo.jpg"
 
 function Logo() {
   return (
